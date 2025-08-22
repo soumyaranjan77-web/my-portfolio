@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soumya • Portfolio (Visitor Gate)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    .social-links {
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      /* change color */
+      font-size: 30px;
+      /* icon size */
+      margin: 0 10px;
+      /* spacing between icons */
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #0A66C2;
+      /* LinkedIn blue when hover */
+    }
+
+    .social-links a:nth-child(2):hover {
+      color: #1DA1F2;
+      /* Twitter blue when hover */
+    }
+
+
+    :root {
+      --bg: #0f172a;
+      /* slate-900 */
+      --bg-soft: #111827ee;
+      /* overlay */
+      --card: #111827;
+      /* gray-900 */
+      --muted: #94a3b8;
+      /* slate-400 */
+      --text: #e5e7eb;
+      /* gray-200 */
+      --brand: #38bdf8;
+      /* sky-400 */
+      --brand-2: #8b5cf6;
+      /* violet-500 */
+      --accent: #22d3ee;
+      /* cyan-400 */
+      --danger: #ef4444;
+      /* red-500 */
+      --ok: #22c55e;
+      /* green-500 */
+      --ring: 0 10px 30px rgba(56, 189, 248, 0.35);
+    }
+
+    :root.light {
+      --bg: #f4f6fb;
+      --bg-soft: #ffffffb3;
+      --card: #ffffff;
+      --muted: #475569;
+      --text: #0f172a;
+      --brand: #0ea5e9;
+      --brand-2: #7c3aed;
+      --accent: #06b6d4;
+      --ring: 0 10px 24px rgba(14, 165, 233, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(56, 189, 248, .15), transparent),
+        radial-gradient(1000px 500px at 120% 10%, rgba(139, 92, 246, .12), transparent),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      z-index: 1000;
+    }
+
+    .spinner {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 6px solid transparent;
+      border-top-color: var(--brand);
+      border-right-color: var(--brand-2);
+      animation: spin 1s linear infinite;
+      box-shadow: var(--ring);
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Topbar */
+    .topbar {
+      position: fixed;
+      inset-inline: 0;
+      top: 12px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      z-index: 60;
+    }
+
+    .chip {
+      backdrop-filter: blur(10px);
+      background: var(--bg-soft);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, .08);
+      padding: 10px 14px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--ring);
+    }
+
+    .chip button,
+    .chip a {
+      all: unset;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Layout */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Gate */
+    .gate {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 48px 24px;
+    }
+
+    .gate-card {
+      width: 100%;
+      max-width: 760px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02));
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--ring);
+    }
+
+    .gate-header {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-family: Poppins, Inter, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: clamp(26px, 4vw, 36px);
+    }
+
+    .subtitle {
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .field {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .08);
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 12px;
+      width: 100%;
+      outline: none;
+      transition: border .2s, box-shadow .2s;
+    }
+
+    .field:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 6px rgba(56, 189, 248, .12);
+    }
+
+    .help {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .error {
+      font-size: 12px;
+      color: var(--danger);
+      margin-top: 6px;
+      display: none;
+    }
+
+    .row {
+      display: grid;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: .3px;
+      transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
+      text-transform: none;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: white;
+      box-shadow: var(--ring);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .bar {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .18), transparent);
+      margin: 16px 0;
+    }
+
+    /* Portfolio */
+    .hidden {
+      display: none !important;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 52px);
+      line-height: 1.1;
+      margin: 0 0 6px;
+    }
+
+    .hero .lead {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: var(--accent);
+      background: rgba(34, 211, 238, .08);
+      font-weight: 700;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1000px) {
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project img {
+      width: 100%;
+      border-radius: 14px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    .project h3 {
+      margin: 10px 0 6px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .skills {
+      display: grid;
+      gap: 10px;
+    }
+
+    .skill {
+      display: grid;
+      gap: 8px;
+    }
+
+    .meter {
+      height: 10px;
+      background: #0b1224;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .meter>span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      transition: width 1s ease;
+    }
+
+    .timeline {
+      border-left: 2px dashed rgba(255, 255, 255, .18);
+      padding-left: 16px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .t-item {
+      position: relative;
+    }
+
+
+
+    .t-item::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, .2);
+    }
+
+    .visitor-panel {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 16px;
+      padding: 14px 16px;
+      width: 280px;
+      box-shadow: var(--ring);
+      z-index: 50;
+    }
+
+    .visitor-panel h4 {
+      margin: 0 0 6px;
+    }
+
+    .visitor-panel small {
+      color: var(--muted);
+    }
+
+    .floating {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      display: grid;
+      gap: 10px;
+      z-index: 55;
+    }
+
+    .to-top {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+    }
+
+    .filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .filter button {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .filter button.active {
+      background: rgba(56, 189, 248, .12);
+      border-color: var(--brand);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 24px 0 50px;
+    }
+
+    /* Appear animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, #ff7eb3, #ff758c);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #ff758c, #ff7eb3);
+      transform: scale(1.05);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background: #2f10c6;
+    }
+
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="spinner" aria-label="Loading"></div>
+  </div>
+
+  <!-- Top chips: theme + return visitor shortcut -->
+  <div class="topbar">
+    <div class="chip">
+      <span>🌓</span>
+      <button id="themeToggle" aria-label="Toggle theme">Toggle theme</button>
+    </div>
+    <div class="chip hidden" id="returnChip">
+      <span>👋</span>
+      <span id="returnText">Welcome back</span>
+      <button id="continueBtn">Continue</button>
+    </div>
+  </div>
+
+  <!-- Visitor Gate -->
+  <section class="gate" id="gate">
+    <div class="gate-card">
+      <div class="gate-header">
+        <div class="title">Welcome to Soumya's Portfolio</div>
+        <div class="subtitle">Before you enter, please share a few details. This helps personalize your experience. Your
+          data stays in your browser .</div>
+      </div>
+      <div class="bar"></div>
+      <form id="gateForm" novalidate>
+        <div class="grid-2">
+          <div class="row">
+            <label for="vName">Your Name</label>
+            <input id="vName" class="field" type="text" placeholder="e.g., xyz" required minlength="2" />
+            <div class="error" id="eName">Please enter at least 2 characters.</div>
+          </div>
+          <div class="row">
+            <label for="vEmail">Email</label>
+            <input id="vEmail" class="field" type="email" placeholder="e.g., abc@mail.com" required />
+            <div class="error" id="eEmail">Please enter a valid email address.</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="row">
+            <label for="vReason">What brings you here?</label>
+            <select id="vReason" class="field" required>
+              <option value="" disabled selected>Select a reason</option>
+              <option value="learn">Learning</option>
+              <option value="other">Just browsing</option>
+            </select>
+            <div class="error" id="eReason">Please select a reason.</div>
+          </div>
+          <div class="row">
+            <label for="vCity">City & Country</label>
+            <input id="vCity" class="field" type="text" placeholder="e.g., Bhubaneswar, India" required minlength="3" />
+            <div class="error" id="eCity">Please enter your city & country.</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="row">
+            <label for="vRating">How excited are you to explore? <small>(1–10)</small></label>
+            <input id="vRating" class="field" type="range" min="1" max="10" value="7" />
+            <div class="help">Current: <span id="vRatingVal">7</span></div>
+          </div>
+          <div class="row">
+            <label for="vColor">Pick an accent color</label>
+            <input id="vColor" class="field" type="color" value="#38bdf8" />
+            <div class="help">This will tint some UI elements for you.</div>
+          </div>
+        </div>
+        <div class="row">
+          <label for="vSite">Your website / social (optional)</label>
+          <input id="vSite" class="field" type="url" placeholder="https://your-link.com" />
+          <div class="error" id="eSite">Please enter a valid URL (https://...).</div>
+        </div>
+        <div class="row" style="margin-top:6px;">
+          <label class="help"><input type="checkbox" id="vConsent" /> I agree to store this info in my browser
+            (localStorage) for a better experience.</label>
+          <div class="error" id="eConsent">Consent required to continue.</div>
+        </div>
+        <div class="row" style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn primary" type="submit">Enter Portfolio</button>
+          <button class="btn ghost" id="badgeBtn" type="button">Generate Visitor Badge</button>
+          <a class="btn ghost" id="resetBtn" role="button">Reset saved data</a>
+        </div>
+      </form>
+      <canvas id="badgeCanvas" width="720" height="260" class="hidden" aria-hidden="true"></canvas>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  </div>
+  <main id="portfolio" class="hidden" aria-hidden="true">
+    <section class="section hero wrap">
+      <div class="reveal">
+        <div class="tag">👋 Hi <span id="helloName">there</span> — welcome!</div>
+        <header>
+          <img src="soumya.jpg" alt="Soumya Ranjan">
+          <div>
+            <h1>Soumya Ranjan</h1>
+            <p>Web Developer | Learner</p>
+          </div>
+        </header>
+
+        <h1>I build delightful web experiences
+          <br><span id="typing"></span>
+        </h1>
+        <p class="lead">I’m Soumya, a front‑end enthusiast exploring clean UI, fast UX, and tiny delightful details.
+          This portfolio showcases certifications, skills, and a little bit of my Achievements.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#certifications">View Certifications</a>
+          <a class="btn ghost" href="#contact">Contact Me</a>
+          <a class="btn ghost" download href="soumyaresume.pdf" id="downloadResume">Download Résumé (PDF)</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop"
+            alt="developer desk" style="width:100%; border-radius:14px; aspect-ratio: 4/3; object-fit: cover;" />
+          <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+            <span class="pill">PYTHON</span>
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+            <span class="pill">JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Section (Initially Hidden) -->
+    <!-- Button to Show About Section -->
+    <div style="text-align:center; margin: 20px 0;">
+      <button id="showAboutBtn" class="btn">Show About Me</button>
+      <section id="about" style="display:none;">
+        <h2>About Me</h2>
+        <div class="about-container">
+          <div class="about-text">
+            <h3>Personal Information</h3>
+            <p><strong>Name:</strong> Soumya Ranjan</p>
+            <p><strong>Father’s Name:</strong> Mr. Surendra Mohapatra</p>
+            <p><strong>Date of Birth:</strong> 08/03/2006</p>
+            <p><strong>Email:</strong> srranjansoumya7777@gmail.com</p>
+            <p><strong>Phone:</strong> +91-8093279764</p>
+            <p><strong>Location:</strong> Bhubaneswar, India 🌍</p>
+
+            <h3>Education</h3>
+            <ul>
+              <li><strong>Schooling:</strong> Labani devi uchha bidya pitha, Santara (10th Pass Year 2022)</li>
+              <li><strong>Intermediate:</strong> Kanhucharan Higher Secondary School, Korai (12th Pass Year 2024)</li>
+              <li><strong>Graduation:</strong> GITA Autonomous College, Bhubaneswar (CSE-AI&ML, 2024-28)</li>
+            </ul>
+
+            <h3>Skills & Interests</h3>
+            <ul>
+              <li>Web Development 🌐</li>
+              <li>Coding & Problem Solving 💻</li>
+              <li>Design & Creativity 🎨</li>
+              <li>Soak in the beats 🎶⚽</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="section wrap" id="skills">
+        <h2 class="reveal">Skills</h2>
+        <div class="skills reveal">
+          <div class="skill">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>HTML5</strong><small class="muted">Competent</small>
+            </div>
+            <div class="meter"><span data-width="80%"></span></div>
+          </div>
+          <div class="skill">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>CSS3</strong><small class="muted">Intermediate</small>
+            </div>
+            <div class="meter"><span data-width="60%"></span></div>
+          </div>
+          <div class="skill">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>JavaScript</strong><small class="muted">Beginner</small>
+            </div>
+            <div class="meter"><span data-width="20%"></span></div>
+          </div>
+        </div>
+      </section>
+      <section class="section wrap" id="certifications">
+        <h2 class="reveal">Certifications</h2>
+        <div class="grid-3">
+          <article class="card reveal">
+            <h3>Generative AI</h3>
+            <p>LinkedIn Learning</p>
+          </article>
+          <article class="card reveal">
+            <h3>OS-CIT</h3>
+            <p>OKCL</p>
+          </article>
+          <article class="card reveal">
+            <h3>Python for Beginners</h3>
+            <p>Newton School of Technology</p>
+          </article>
+          <article class="card reveal">
+            <h3>Oracle Foundation Certified</h3>
+            <p>ORACLE University</p>
+          </article>
+
+        </div>
+      </section>
+      <section class="section wrap" id="contact">
+        <h2 class="reveal">Contact</h2>
+        <div class="card reveal">
+          <form id="contactForm">
+            <div class="grid-2">
+              <div class="row">
+                <label for="cName">Name</label>
+                <input id="cName" class="field" type="text" required />
+              </div>
+              <div class="row">
+                <label for="cEmail">Email</label>
+                <input id="cEmail" class="field" type="email" required />
+              </div>
+            </div>
+            <div class="row">
+              <label for="cMsg">Message</label>
+              <textarea id="cMsg" class="field" rows="4" required></textarea>
+            </div>
+            <button class="btn primary" type="submit">Send</button>
+            <span id="cStatus" class="help" style="margin-left:10px;"></span>
+          </form>
+        </div>
+      </section>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://x.com/soumyaranj57702" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </div>
+
+
+      <div class="footer wrap">© <span id="year"></span> Soumya • Built with HTML/CSS/JS</div>
+  </main>
+
+  <!-- Floating UI -->
+  <div class="floating">
+    <button class="btn primary hidden" id="openVisitorPanel">Show visitor info</button>
+    <button class="btn ghost" id="copyLink">Copy share link</button>
+  </div>
+  <div class="to-top">
+    <button class="btn ghost" id="toTop">↑ Top</button>
+  </div>
+
+  <!-- Visitor info panel -->
+  <aside class="visitor-panel hidden" id="visitorPanel" aria-live="polite">
+    <h4>Your Visitor Card</h4>
+    <small>Stored in your browser only.</small>
+    <div id="visitorCard" style="margin-top:8px"></div>
+    <div style="display:flex; gap:8px; margin-top:10px;">
+      <button class="btn ghost" id="hidePanel">Hide</button>
+      <button class="btn primary" id="downloadBadge">Download Badge</button>
+    </div>
+  </aside>
+
+  <script>
+    const $ = (s, p = document) => p.querySelector(s);
+    const $$ = (s, p = document) => Array.from(p.querySelectorAll(s));
+
+    // THEME
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') root.classList.add('light');
+
+    $('#themeToggle').addEventListener('click', () => {
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // PRELOADER
+    window.addEventListener('load', () => setTimeout(() => $('#preloader').classList.add('hidden'), 300));
+
+    // RETURN VISITOR
+    const visitorKey = 'portfolioVisitor';
+    const lastVisitor = JSON.parse(localStorage.getItem(visitorKey) || 'null');
+    if (lastVisitor?.name) {
+      $('#returnChip').classList.remove('hidden');
+      $('#returnText').textContent = `Welcome back, ${lastVisitor.name}`;
+      $('#continueBtn').addEventListener('click', () => enterPortfolio(lastVisitor));
+    }
+
+    // RATING SLIDER VALUE
+    $('#vRating').addEventListener('input', e => $('#vRatingVal').textContent = e.target.value);
+
+    // FORM VALIDATION & SUBMIT
+    $('#gateForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {
+        name: $('#vName').value.trim(),
+        email: $('#vEmail').value.trim(),
+        reason: $('#vReason').value,
+        city: $('#vCity').value.trim(),
+        rating: $('#vRating').value,
+        color: $('#vColor').value,
+        site: $('#vSite').value.trim(),
+        ts: new Date().toISOString()
+      };
+
+      let ok = true;
+      // Name
+      if (data.name.length < 2) { ok = false; $('#eName').style.display = 'block'; } else { $('#eName').style.display = 'none'; }
+      // Email
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+      if (!emailOk) { ok = false; $('#eEmail').style.display = 'block'; } else { $('#eEmail').style.display = 'none'; }
+      // Reason
+      if (!data.reason) { ok = false; $('#eReason').style.display = 'block'; } else { $('#eReason').style.display = 'none'; }
+      // City
+      if (data.city.length < 3) { ok = false; $('#eCity').style.display = 'block'; } else { $('#eCity').style.display = 'none'; }
+      // Site (optional but must be valid if provided)
+      if (data.site && !/^https?:\/\//i.test(data.site)) { ok = false; $('#eSite').style.display = 'block'; } else { $('#eSite').style.display = 'none'; }
+      // Consent
+      if (!$('#vConsent').checked) { ok = false; $('#eConsent').style.display = 'block'; } else { $('#eConsent').style.display = 'none'; }
+
+      if (!ok) return;
+
+      localStorage.setItem(visitorKey, JSON.stringify(data));
+      enterPortfolio(data);
+    });
+
+    // RESET DATA
+    $('#resetBtn').addEventListener('click', () => {
+      localStorage.removeItem(visitorKey);
+      alert('Saved data cleared.');
+      location.reload();
+    });
+
+    // ENTER PORTFOLIO
+    function enterPortfolio(data) {
+      // personalize accent color
+      document.documentElement.style.setProperty('--brand', data.color || '#38bdf8');
+      $('#helloName').textContent = data.name.split(' ')[0];
+
+      // build visitor card
+      $('#visitorCard').innerHTML = `
+        <div><strong>Name:</strong> ${escapeHtml(data.name)}</div>
+        <div><strong>Email:</strong> ${escapeHtml(data.email)}</div>
+        <div><strong>City:</strong> ${escapeHtml(data.city)}</div>
+        <div><strong>Reason:</strong> ${escapeHtml(startCase(data.reason))}</div>
+        <div><strong>Excitement:</strong> ${data.rating}/10</div>
+        ${data.site ? `<div><strong>Link:</strong> <a href="${escapeAttr(data.site)}" target="_blank" rel="noopener">${escapeHtml(data.site)}</a></div>` : ''}
+        <div><small>Visited: ${new Date(data.ts).toLocaleString()}</small></div>
+      `;
+
+      // toggle views
+      $('#gate').classList.add('hidden');
+      $('#portfolio').classList.remove('hidden');
+      $('#portfolio').removeAttribute('aria-hidden');
+      $('#openVisitorPanel').classList.remove('hidden');
+
+      // store name on chip
+      $('#returnText').textContent = `Hi again, ${data.name.split(' ')[0]}`;
+
+      // focus to hero
+      location.hash = '#';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // start animations
+      initTyping();
+      revealOnScroll();
+      animateMeters();
+    }
+
+    // Escape helpers
+    function escapeHtml(str) { return str.replace(/[&<>"]+/g, s => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[s])); }
+    function escapeAttr(str) { return str.replace(/"/g, '&quot;'); }
+    function startCase(str) { return String(str || '').replace(/(^|[-_\s])([a-z])/g, (_, p1, p2) => p1 + p2.toUpperCase()); }
+
+    // TYPING EFFECT
+    const typingPhrases = ['fast, accessible, responsive.', 'with tiny delightful details.', 'that people actually enjoy using.'];
+    let tpIndex = 0, charIndex = 0, typingEl = null, typingTimer = null;
+    function initTyping() {
+      typingEl = $('#typing');
+      if (typingTimer) clearInterval(typingTimer);
+      typingEl.textContent = '';
+      typingTimer = setInterval(() => {
+        const current = typingPhrases[tpIndex];
+        typingEl.textContent = current.slice(0, ++charIndex);
+        if (charIndex > current.length + 10) { // pause
+          tpIndex = (tpIndex + 1) % typingPhrases.length; charIndex = 0; typingEl.textContent = '';
+        }
+      }, 80);
+    }
+
+    // REVEAL ON SCROLL
+    function revealOnScroll() {
+      const items = $$('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+      }, { threshold: .2 });
+      items.forEach(el => io.observe(el));
+    }
+
+    // METERS
+    function animateMeters() {
+      $$('.meter > span').forEach(el => {
+        const w = el.getAttribute('data-width') || '0%';
+        requestAnimationFrame(() => el.style.width = w);
+      });
+    }
+
+    // PROJECT FILTER
+    $$('.filter button').forEach(btn => btn.addEventListener('click', () => {
+      $$('.filter button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.getAttribute('data-filter');
+      $$('.project').forEach(card => {
+        const show = (f === 'all') || (card.getAttribute('data-cat') === f);
+        card.style.display = show ? '' : 'none';
+      });
+    }));
+
+    // CONTACT (demo only)
+    $('#contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      $('#cStatus').textContent = 'Thanks! Your message has been noted.';
+      e.target.reset();
+    });
+
+    // FLOATING CONTROLS
+    $('#openVisitorPanel').addEventListener('click', () => $('#visitorPanel').classList.remove('hidden'));
+    $('#hidePanel').addEventListener('click', () => $('#visitorPanel').classList.add('hidden'));
+    $('#toTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // COPY LINK
+    $('#copyLink').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(location.href); alert('Link copied!'); } catch { alert('Copy failed'); }
+    });
+
+    // DOWNLOAD RESUME (placeholder PDF)
+   $('#downloadResume').addEventListener('click', (e) => {
+  e.preventDefault();  // prevent default
+  const link = document.createElement('a');
+  link.href = 'soumyaresume.pdf';       // <-- your uploaded resume file
+  link.download = 'Soumya-Ranjan-Resume.pdf'; // file name on download
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+
+
+    // BADGE GENERATION
+    function drawBadge(data) {
+      const c = $('#badgeCanvas');
+      const ctx = c.getContext('2d');
+      const w = c.width, h = c.height;
+      // bg
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, getComputedStyle(document.documentElement).getPropertyValue('--brand').trim());
+      grad.addColorStop(1, getComputedStyle(document.documentElement).getPropertyValue('--brand-2').trim());
+      ctx.fillStyle = '#0b1022'; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, w, 90);
+
+      // header
+      ctx.fillStyle = 'white';
+      ctx.font = '700 22px Poppins, sans-serif';
+      ctx.fillText('Visitor Badge • Portfolio', 20, 58);
+
+      // body
+      ctx.fillStyle = '#e5e7eb';
+      ctx.font = '600 20px Inter, sans-serif';
+      ctx.fillText(`Name: ${data.name}`, 20, 130);
+      ctx.font = '400 18px Inter, sans-serif';
+      ctx.fillText(`Email: ${data.email}`, 20, 160);
+      ctx.fillText(`City: ${data.city}`, 20, 186);
+      ctx.fillText(`Reason: ${startCase(data.reason)}`, 20, 212);
+      ctx.fillText(`Excitement: ${data.rating}/10`, 420, 130);
+
+      // tiny footer
+      ctx.font = '400 14px Inter, sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText(new Date(data.ts).toLocaleString(), 420, 212);
+
+      c.classList.remove('hidden');
+      return c;
+    }
+
+    $('#badgeBtn').addEventListener('click', () => {
+      const data = {
+        name: $('#vName').value.trim() || 'Guest',
+        email: $('#vEmail').value.trim() || '—',
+        reason: $('#vReason').value || '—',
+        city: $('#vCity').value.trim() || '—',
+        rating: $('#vRating').value,
+        ts: new Date().toISOString()
+      };
+      drawBadge(data);
+      // offer download
+      const link = document.createElement('a');
+      link.download = `Visitor-Badge-${(data.name || 'Guest').replace(/\s+/g, '-')}.png`;
+      link.href = $('#badgeCanvas').toDataURL('image/png');
+      link.click();
+    });
+
+    $('#downloadBadge').addEventListener('click', () => {
+      const data = JSON.parse(localStorage.getItem(visitorKey) || 'null');
+      if (!data) return alert('Enter portfolio first to generate badge.');
+      drawBadge(data);
+      const link = document.createElement('a');
+      link.download = `Visitor-Badge-${(data.name || 'Guest').replace(/\s+/g, '-')}.png`;
+      link.href = $('#badgeCanvas').toDataURL('image/png');
+      link.click();
+    });
+
+    // On load: if you want auto-enter for returning visitors, uncomment below
+    // if (lastVisitor) enterPortfolio(lastVisitor);
+
+    // YEAR
+    $('#year').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    // Show About Me Section on Button Click
+    document.getElementById("showAboutBtn").addEventListener("click", function () {
+      document.getElementById("about").style.display = "block";
+      this.style.display = "none"; // hide the button after clicking
+    });
+  </script>
+
+</body>
+
+</html>
